@@ -21,4 +21,3 @@ schema.js | テーブル情報を表示するサンプル
 select.js | テーブルからデータを取得するサンプル
 tables.js | テーブル名を表示するサンプル
 test.db | app5.jsやapp6.jsで使用するデータベース
-attt
