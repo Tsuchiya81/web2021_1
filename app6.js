@@ -76,9 +76,9 @@ app.get("/insert", (req, res) => {
 })
 
 
-app.post("/insert", (req, res) => {
+app.get("/insert", (req, res) => {
   let sql = `
-  insert into drink (name,price,) values (` + req.body.drink + `,` + req.body.price + `,` + req.body.com + `);
+  insert into drink (name,price,company_id) values (` + req.body.drink + `,` + req.body.price + `,` + req.body.cid + `);
 `
   console.log(sql);
   db.serialize( () => {
