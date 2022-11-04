@@ -6,11 +6,16 @@
 </head>
 <body>
   <h2>追加ページ</h2>
-  <form action="/top">
-    <input type="checkbox" name="desc" id="desc">
-    <label for="desc">大きい順</label>
-    <input type="number" name="pop" id="pop">
-    <label for="pop">表示数</label>
+  <form action="/insert">
+    <label for="drink">商品名：</label>
+    <input type="text" name="drink" id="drink">
+    <br>
+    <label for="pop">金額（円）：</label>
+    <input type="number" name="pop" id="pop" min="100" step="10">
+    <br>
+    <label for="com">会社名：</label>
+    <input type="text" name="com" id="com">
+    <br>
     <input type="submit" value="追加">
   </form>
 </body>

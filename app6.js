@@ -43,17 +43,57 @@ app.get("/top", (req, res) => {
     })
 })
 
+
+
+
 app.get("/itiran", (req, res) => {
     db.serialize( () => {
         db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id;", (error, data) => {
             if( error ) {
                 res.render('show', {mes:"エラーです"});
             }
-          console.log(data);
+          //console.log(data);
             res.render('selectAll', {data:data});
         })
     })
 })
+
+app.get("/insert", (req, res) => {
+    //console.log(req.query.pop);    // ①
+    let desc = "";
+    if( req.query.desc ) desc = " desc";
+    let sql = "select id, 都道府県, 人口 from example order by 人口" + desc + " limit " + req.query.pop + ";";
+    //console.log(sql);    // ②
+    db.serialize( () => {
+        db.all(sql, (error, data) => {
+            if( error ) {
+                res.render('show', {mes:"エラーです"});
+            }
+            //console.log(data);    // ③
+            res.render('select', {data:data});
+        })
+    })
+})
+
+
+app.post("/insert", (req, res) => {
+  let sql = `
+  insert into drink (name,price,) values (` + req.body.drink + `,` + req.body.price + `,` + req.body.com + `);
+`
+  console.log(sql);
+  db.serialize( () => {
+    db.run( sql, (error, row) => {
+      console.log(error);
+      if(error) {
+        res.render('show', {mes:"エラーです"});
+      }
+    res.render('show', {mes:"成功です"});
+  });
+});
+console.log(req.body);
+});
+
+
 app.use(function(req, res, next) {
   res.status(404).send('ページが見つかりません');
 });
