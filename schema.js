@@ -1,4 +1,4 @@
-const sqlite3 = require('sqlite3').verbose();
+node const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test2.db');
 
 let sql = `

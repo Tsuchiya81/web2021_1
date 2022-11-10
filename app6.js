@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
   res.render('show7', {mes:message});
 });
 
-app.get("/db", (req, res) => {
+/*app.get("/db", (req, res) => {
     db.serialize( () => {
         db.all("select id, 都道府県, 人口 from example;", (error, row) => {
             if( error ) {
@@ -25,8 +25,8 @@ app.get("/db", (req, res) => {
             res.render('select', {data:row});
         })
     })
-})
-app.get("/top", (req, res) => {
+})*/
+/*app.get("/top", (req, res) => {
     //console.log(req.query.pop);    // ①
     let desc = "";
     if( req.query.desc ) desc = " desc";
@@ -41,7 +41,7 @@ app.get("/top", (req, res) => {
             res.render('select', {data:data});
         })
     })
-})
+})*/
 
 
 
@@ -58,7 +58,7 @@ app.get("/itiran", (req, res) => {
     })
 })
 
-app.get("/insert", (req, res) => {
+/*app.get("/insert", (req, res) => {
     //console.log(req.query.pop);    // ①
     let desc = "";
     if( req.query.desc ) desc = " desc";
@@ -73,21 +73,19 @@ app.get("/insert", (req, res) => {
             res.render('select', {data:data});
         })
     })
-})
+})*/
 
 
 app.get("/insert", (req, res) => {
-  let sql = `
-  insert into drink (name,price,company_id) values (` + req.body.drink + `,` + req.body.price + `,` + req.body.cid + `);
-`
+  let sql = "insert into drink (name,price,company_id) values (" + req.body.drink + "," + req.body.pop + "," + req.body.cid + ");";
   console.log(sql);
   db.serialize( () => {
-    db.run( sql, (error, row) => {
-      console.log(error);
+    db.run( sql, (error, data) => {
+      //console.log(error);
       if(error) {
         res.render('show', {mes:"エラーです"});
       }
-    res.render('show', {mes:"成功です"});
+    res.render('insert_a', {mes:"成功です"});
   });
 });
 console.log(req.body);
