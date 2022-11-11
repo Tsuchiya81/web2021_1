@@ -134,6 +134,33 @@ app.get("/delete", (req, res) => {
 //console.log(req.body);
 });
 
+app.get("/MH", (req, res) => {
+    db.serialize( () => {
+        db.all("select id, name from company ;", (error, data) => {
+            if( error ) {
+                res.render('show', {mes:"エラーです"});
+            }
+          //console.log(data);
+            res.render('MSE', {data:data});
+        })
+    })
+})
+
+app.get("/MSE", (req, res) => {
+  console.log(req.query);
+  let sql = "select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id where company_id =" + req.query.dri + ";";
+  console.log(sql);
+  db.serialize( () => {
+    db.run( sql, (error, data) => {
+      console.log(error);
+      if(error) {
+        res.render('show', {mes:"エラーです"});
+      }
+    res.render('MSH_a', {mes:"成功です"});
+  });
+});
+//console.log(req.body);
+});
 
 
 

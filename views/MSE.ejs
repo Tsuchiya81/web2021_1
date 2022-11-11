@@ -1,0 +1,27 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>メーカー検索</title>
+</head>
+<body>
+  <h2>メーカー検索</h2>
+  <form action="/MSE">
+    <option value=""></option>
+    <form method="post">
+	    <div>
+		    <label for="dri">絞り込みたいメーカー：</label>
+		    <select name="dri">
+		      <option value="">選択してください</option>
+          <% for( let row of data ) { %>
+          <option value="<%= row.id %>"><%= row.name %></option>
+          <% } %>
+		    </select>
+	    </div>
+      <br>
+      <input type="submit" value="絞り込み">
+      <br>
+      <a href="/">トップへ戻る</a><br>
+    </form>
+</body>
+</html>
