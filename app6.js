@@ -105,6 +105,37 @@ app.get("/company", (req, res) => {
     })
 })
 
+app.get("/delch", (req, res) => {
+    db.serialize( () => {
+        db.all("select id, name, price from drink ;", (error, data) => {
+            if( error ) {
+                res.render('show', {mes:"エラーです"});
+            }
+          //console.log(data);
+            res.render('delete', {data:data});
+        })
+    })
+})
+
+
+app.get("/delete", (req, res) => {
+  console.log(req.query);
+  let sql = "delete from drink where id ="+ req.query.dri +";";
+  console.log(sql);
+  db.serialize( () => {
+    db.run( sql, (error, data) => {
+      console.log(error);
+      if(error) {
+        res.render('show', {mes:"エラーです"});
+      }
+    res.render('insert_a', {mes:"成功です"});
+  });
+});
+//console.log(req.body);
+});
+
+
+
 
 app.use(function(req, res, next) {
   res.status(404).send('ページが見つかりません');

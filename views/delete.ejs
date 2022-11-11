@@ -1,0 +1,33 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>削除ページ</title>
+</head>
+<body>
+  <h2>削除ページ</h2>
+  <form action="/delete">
+    <!--<label for="drink">商品名：</label>
+    <input type="text" name="drink" id="drink">
+    <br>
+    <label for="pop">金額（円）：</label>
+    <input type="number" name="pop" id="pop" min="100" step="10">
+    -->
+    <option value=""></option>
+    <form method="post">
+	    <div>
+		    <label for="dri">削除項目</label>
+		    <select name="dri">
+		      <option value="">選択してください</option>
+          <% for( let row of data ) { %>
+          <option value="<%= row.id %>"><%= row.name %><%= row.price %></option>
+          <% } %>
+		    </select>
+	    </div>
+      <br>
+      <input type="submit" value="削除">
+      <br>
+      <a href="/">トップへ戻る</a><br>
+    </form>
+</body>
+</html>
