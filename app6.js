@@ -77,23 +77,37 @@ app.get("/itiran", (req, res) => {
 
 
 app.get("/insert", (req, res) => {
-  let sql = "insert into drink (name,price,company_id) values (" + req.body.drink + "," + req.body.pop + "," + req.body.cid + ");";
+  console.log(req.query);
+  let sql = "insert into drink (name,price,company_id) values (" + `"` + req.query.drink + `"` + "," + req.query.pop + "," + req.query.cid + ");";
   console.log(sql);
   db.serialize( () => {
     db.run( sql, (error, data) => {
-      //console.log(error);
+      console.log(error);
       if(error) {
         res.render('show', {mes:"エラーです"});
       }
     res.render('insert_a', {mes:"成功です"});
   });
 });
-console.log(req.body);
+//console.log(req.body);
 });
+
+
+app.get("/company", (req, res) => {
+    db.serialize( () => {
+        db.all("select id, name from company ;", (error, data) => {
+            if( error ) {
+                res.render('show', {mes:"エラーです"});
+            }
+          //console.log(data);
+            res.render('insert', {data:data});
+        })
+    })
+})
 
 
 app.use(function(req, res, next) {
   res.status(404).send('ページが見つかりません');
 });
 
-app.listen(8080, () => console.log("Example app listening on port 8080!"));
+app.listen(80, () => console.log("Example app listening on port 80!"));

@@ -13,8 +13,19 @@
     <label for="pop">金額（円）：</label>
     <input type="number" name="pop" id="pop" min="100" step="10">
     <br>
-    <label for="com">会社ID：</label>
-    <input type="number" name="cid" id="cid" min="1" max="4">
+
+  <option value=""></option>
+  <form method="post">
+	  <div>
+		  <label for="com">会社ID</label>
+		  <select name="cid">
+		  <option value="">選択してください</option>
+		  <option value="1">コカコーラ</option>
+		  <option value="2">キリン</option>
+		  <option value="3">サントリー</option>
+		  <option value="4">アサヒ</option>
+		  </select>
+	  </div>
     <br>
     <input type="submit" value="追加">
     <br>
