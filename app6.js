@@ -151,20 +151,18 @@ app.get("/masele", (req, res) => {
 
 
 app.get("/masele_a", (req, res) => {
-  console.log(req.query);
-  let sql = "select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id where company_id =" + req.query.dri + ";";
-  console.log(sql);
-  db.serialize( () => {
-    db.run( sql, (error, data) => {
-      console.log(error);
-      if(error) {
-        res.render('show', {mes:"エラーです"});
-      }
-    res.render('MSH_a', {data:data});
-  });
-});
-//console.log(req.body);
-});
+    console.log(req.query);
+    db.serialize( () => {
+        db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id where company_id =" + req.query.dri + ";", (error, data) => {
+            if( error ) {
+                res.render('show', {mes:"エラーです"});
+            }
+          //console.log(data);
+            res.render('MSH_a', {data:data});
+        })
+    })
+})
+
 
 
 
