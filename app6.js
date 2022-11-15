@@ -76,24 +76,7 @@ app.get("/itiran", (req, res) => {
 })*/
 
 
-app.get("/insert", (req, res) => {
-  console.log(req.query);
-  let sql = "insert into drink (name,price,company_id) values (" + `"` + req.query.drink + `"` + "," + req.query.pop + "," + req.query.cid + ");";
-  console.log(sql);
-  db.serialize( () => {
-    db.run( sql, (error, data) => {
-      console.log(error);
-      if(error) {
-        res.render('show', {mes:"エラーです"});
-      }
-    res.render('insert_a', {mes:"成功です"});
-  });
-});
-//console.log(req.body);
-});
-
-
-app.get("/company", (req, res) => {
+app.get("/insele", (req, res) => {
     db.serialize( () => {
         db.all("select id, name from company ;", (error, data) => {
             if( error ) {
@@ -105,7 +88,26 @@ app.get("/company", (req, res) => {
     })
 })
 
-app.get("/delch", (req, res) => {
+
+app.get("/insert", (req, res) => {
+  console.log(req.query);
+  let sql = "insert into drink (name,price,company_id) values (" + `"` + req.query.drink + `"` + "," + req.query.pop + "," + req.query.cid + ");";
+  console.log(sql);
+  db.serialize( () => {
+    db.run( sql, (error, data) => {
+      console.log(error);
+      if(error) {
+        res.render('show', {mes:"エラーです"});
+      }
+    res.render('insert_a', {mes:"追加しました"});
+  });
+});
+//console.log(req.body);
+});
+
+
+
+app.get("/desele", (req, res) => {
     db.serialize( () => {
         db.all("select id, name, price from drink ;", (error, data) => {
             if( error ) {
@@ -128,25 +130,27 @@ app.get("/delete", (req, res) => {
       if(error) {
         res.render('show', {mes:"エラーです"});
       }
-    res.render('insert_a', {mes:"成功です"});
+    res.render('insert_a', {mes:"削除しました"});
   });
 });
 //console.log(req.body);
 });
 
-app.get("/MH", (req, res) => {
+app.get("/masele", (req, res) => {
     db.serialize( () => {
         db.all("select id, name from company ;", (error, data) => {
             if( error ) {
                 res.render('show', {mes:"エラーです"});
             }
           //console.log(data);
-            res.render('MSE', {data:data});
+            res.render('maselepage', {data:data});
         })
     })
 })
 
-app.get("/MSE", (req, res) => {
+
+
+app.get("/masele_a", (req, res) => {
   console.log(req.query);
   let sql = "select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id where company_id =" + req.query.dri + ";";
   console.log(sql);
@@ -156,7 +160,7 @@ app.get("/MSE", (req, res) => {
       if(error) {
         res.render('show', {mes:"エラーです"});
       }
-    res.render('MSH_a', {mes:"成功です"});
+    res.render('MSH_a', {data:data});
   });
 });
 //console.log(req.body);
