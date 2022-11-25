@@ -6,7 +6,25 @@
 </head>
 <body>
   <h2>一覧表</h2>
-  <table>
+  <form action="/itiran">
+		  <label for="item">並び順：</label>
+	    <select name="item">
+	      <option value="drink.id">ID</option>
+		    <option value="price">金額</option>
+		  </select>
+    <input type="radio" name="desc" value="asc" checked>
+    <label for="desc">昇順</label>
+    <input type="radio" name="desc" value="desc">
+    <label for="desc">降順</label>
+    
+    <input type="submit" value="並び替え">
+  </form>
+  <table border="1">
+    <tr>
+      <th>ID　</th>
+      <th>商品名　</th>
+      <th>金額(円)　</th>
+      <th>メーカー名　</th>
       <% for( let row of data ) { %>
         <tr>
             <td><%= row.id %></td>
@@ -15,6 +33,7 @@
             <td><%= row.name2 %></td>
         </tr>
       <% } %>
+    </tr>
   </table>
         <a href="/">トップへ戻る</a><br>
         <a href="/insele">商品を追加</a><br>

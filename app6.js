@@ -43,12 +43,24 @@ app.get("/", (req, res) => {
     })
 })*/
 
-
+app.get("/top", (req, res) => {
+  console.log(req.query)
+    db.serialize( () => {
+        db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id;", (error, data) => {
+            if( error ) {
+                res.render('show', {mes:"エラーです"});
+            }
+          //console.log(data);
+            res.render('selectAll', {data:data});
+        })
+    })
+})
 
 
 app.get("/itiran", (req, res) => {
+  console.log(req.query)
     db.serialize( () => {
-        db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id;", (error, data) => {
+        db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id order by " + req.query.item +" "+ req.query.desc +";", (error, data) => {
             if( error ) {
                 res.render('show', {mes:"エラーです"});
             }
