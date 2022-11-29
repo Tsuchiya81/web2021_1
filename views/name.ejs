@@ -1,0 +1,26 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>メーカー検索</title>
+  <style>
+  body {
+    font-family:serif;
+  </style>
+</head>
+<body>
+  <h2>商品名検索</h2>
+  <form action="/n_search">
+    <option value=""></option>
+    <form method="post">
+	    <div>
+		    <label for="drink">商品名：</label>
+        <input type="text" name="name" placeholder="商品名に含む文字列を入力してください">
+	    </div>
+      <br>
+      <input type="submit" value="検索">
+      <br>
+      <a href="/top">一覧へ戻る</a><br>
+    </form>
+</body>
+</html>
