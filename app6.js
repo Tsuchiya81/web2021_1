@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 
 app.get("/", (req, res) => {
-  const message = "Hello world";
+  const message = "飲み物の記録が見られるよ";
   res.render('show7', {mes:message});
 });
 
