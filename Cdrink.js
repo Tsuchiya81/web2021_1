@@ -5,8 +5,9 @@ let schema = `
 create table drink(
   id integer primary key,
   name text,
-  price integer,
-  company_id integer
+  company_id integer,
+  cal integer,
+  size integer
 );
 `
 
