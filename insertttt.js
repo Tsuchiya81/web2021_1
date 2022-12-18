@@ -1,18 +1,15 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test2.db');
 
-let sql = `
-select id, name from company;
-`
+let sql = 
+  `insert into company ("name") values ("伊藤園");`
 
 db.serialize( () => {
-	db.all( sql, (error, row) => {
+	db.run( sql, (error, row) => {
 		if(error) {
 			console.log('Error: ', error );
 			return;
 		}
-		for( let data of row ) {
-			console.log( data.id + ' : ' + data.name);
-		}
+		console.log( "データを追加しました" );
 	});
 });

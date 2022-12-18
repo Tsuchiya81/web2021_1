@@ -2,10 +2,11 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test2.db');
 
 let sqls = [
-  `insert into company ("name") values ("コカコーラ");`,
+  `insert into company ("name") values ("コカ・コーラ");`,
   `insert into company ("name") values ("キリン");`,
   `insert into company ("name") values ("サントリー");`,
   `insert into company ("name") values ("アサヒ");`,
+  `insert into company ("name") values ("伊藤園");`
 ]
 for( let sql of sqls ){
   db.serialize( () => {
