@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 app.get("/top", (req, res) => {
   console.log(req.query)
     db.serialize( () => {
-        db.all("select id, name, company_id, cal, size from drink;", (error, data) => {
+        db.all("select id, name, cal, size from drink;", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
@@ -60,7 +60,7 @@ app.get("/top", (req, res) => {
 app.get("/itiran", (req, res) => {
   console.log(req.query)
     db.serialize( () => {
-        db.all("select id, name, company_id, cal, size from drink order by " + req.query.item +" "+ req.query.desc +";", (error, data) => {
+        db.all("select id, name, cal, size from drink order by " + req.query.item +" "+ req.query.desc +";", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
@@ -121,7 +121,7 @@ app.get("/insert", (req, res) => {
 
 app.get("/desele", (req, res) => {
     db.serialize( () => {
-        db.all("select id, name, company_id, cal, size from drink ;", (error, data) => {
+        db.all("select id, name,  cal, size from drink ;", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
@@ -148,29 +148,29 @@ app.get("/delete", (req, res) => {
 //console.log(req.body);
 });
 
-app.get("/masele", (req, res) => {
+app.get("/makerselect", (req, res) => {
     db.serialize( () => {
         db.all("select id, name from company ;", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
           //console.log(data);
-            res.render('maselepage', {data:data});
+            res.render('makerselectpage', {data:data});
         })
     })
 })
 
 
 
-app.get("/masele_a", (req, res) => {
+app.get("/makerselect_a", (req, res) => {
     console.log(req.query);
     db.serialize( () => {
-        db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id where company_id =" + req.query.dri + ";", (error, data) => {
+        db.all("select drink.id, drink.name, drink.cal, drink.size, company.name as name2 from drink inner join company on drink.company_id = company.id where company_id =" + req.query.dri + ";", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
           //console.log(data);
-            res.render('MSH_a', {data:data});
+            res.render('maker_result', {data:data});
         })
     })
 })

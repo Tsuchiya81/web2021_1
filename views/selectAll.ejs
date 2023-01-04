@@ -24,20 +24,18 @@
     
     <input type="submit" value="並び替え">
   </form>
-  <a href="/masele">メーカーごとに表示</a>
+  <a href="/makerselect">メーカーごとに表示</a>
   <a href="public/name.html">商品名検索</a>
   <table border="1">
     <tr>
       <th>ID　</th>
       <th>商品名　</th>
-      <th>企業番号　</th>
       <th>カロリー　</th>
       <th>容量　</th>
       <% for( let row of data ) { %>
         <tr>
             <td><a href="public/name.html"><%= row.id %></a></td>
             <td><%= row.name %></td>
-            <td><%= row.company_id %></td>
             <td><%= row.cal %></td>
             <td><%= row.size %></td>
         </tr>
