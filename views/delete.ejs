@@ -18,7 +18,7 @@
 		    <select name="dri">
 		      <option value="">選択してください</option>
           <% for( let row of data ) { %>
-          <option value="<%= row.id %>"><%= row.name %><%= row.price %></option>
+          <option value="<%= row.id %>"><%= row.name %>, <%= row.cal %>(cal), <%= row.size %>(ml)</option>
           <% } %>
 		    </select>
 	    </div>

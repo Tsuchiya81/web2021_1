@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 app.get("/top", (req, res) => {
   console.log(req.query)
     db.serialize( () => {
-        db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id;", (error, data) => {
+        db.all("select id, name, company_id, cal, size from drink;", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
@@ -60,7 +60,7 @@ app.get("/top", (req, res) => {
 app.get("/itiran", (req, res) => {
   console.log(req.query)
     db.serialize( () => {
-        db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id order by " + req.query.item +" "+ req.query.desc +";", (error, data) => {
+        db.all("select id, name, company_id, cal, size from drink order by " + req.query.item +" "+ req.query.desc +";", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
@@ -103,7 +103,7 @@ app.get("/insele", (req, res) => {
 
 app.get("/insert", (req, res) => {
   console.log(req.query);
-  let sql = "insert into drink (name,price,company_id) values (" + `"` + req.query.drink + `"` + "," + req.query.pop + "," + req.query.cid + ");";
+  let sql = "insert into drink (name,company_id,cal,size) values (" + `"` + req.query.drink + `"` + "," + req.query.cid + "," + req.query.cal + "," + req.query.pop +");";
   console.log(sql);
   db.serialize( () => {
     db.run( sql, (error, data) => {
@@ -111,7 +111,7 @@ app.get("/insert", (req, res) => {
       if(error) {
         res.render('error', {mes:"最初からやり直してください"});
       }
-    res.render('insert_a', {mes:"追加しました"});
+    res.render('result', {mes:"追加しました"});
   });
 });
 //console.log(req.body);
@@ -121,7 +121,7 @@ app.get("/insert", (req, res) => {
 
 app.get("/desele", (req, res) => {
     db.serialize( () => {
-        db.all("select id, name, price from drink ;", (error, data) => {
+        db.all("select id, name, company_id, cal, size from drink ;", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
@@ -142,7 +142,7 @@ app.get("/delete", (req, res) => {
       if(error) {
         res.render('error', {mes:"最初からやり直してください"});
       }
-    res.render('insert_a', {mes:"削除しました"});
+    res.render('result', {mes:"削除しました"});
   });
 });
 //console.log(req.body);
