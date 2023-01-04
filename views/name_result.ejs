@@ -14,14 +14,14 @@
     <tr>
       <th>ID　</th>
       <th>商品名　</th>
-      <th>金額(円)　</th>
-      <th>メーカー名　</th>
+      <th>カロリー　</th>
+      <th>容量　</th>
       <% for( let row of data ) { %>
         <tr>
-            <td><%= row.id %></td>
+            <td><a href="public/name.html"><%= row.id %></a></td>
             <td><%= row.name %></td>
-            <td><%= row.price %></td>
-            <td><%= row.name2 %></td>
+            <td><%= row.cal %></td>
+            <td><%= row.size %></td>
         </tr>
       <% } %>
     </tr>

@@ -179,12 +179,12 @@ app.get("/makerselect_a", (req, res) => {
 app.get("/n_search", (req, res) => {
     console.log(req.query);
     db.serialize( () => {
-        db.all("select drink.id, drink.name, drink.price, company.name as name2 from drink inner join company on drink.company_id = company.id where drink.name like '%" + req.query.name + "%';", (error, data) => {
+        db.all("select id, name, cal, size from drink where name like '%" + req.query.name + "%';", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
           //console.log(data);
-            res.render('name_a', {data:data});
+            res.render('name_result', {data:data});
         })
     })
 })
