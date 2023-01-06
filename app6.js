@@ -102,7 +102,7 @@ app.get("/insele", (req, res) => {
 
 app.get("/insert", (req, res) => {
   console.log(req.query);
-  let sql = "insert ALL into drink (name,company_id,cal,size) values (" + `"` + req.query.drink + `"` + "," + req.query.cid + "," + req.query.cal + "," + req.query.pop +") into sell (drink_id,price) values (" + `"NULL"` + "," + `"NULL"` + ") selet * from dual;";
+  let sql = "insert into drink (name,company_id,cal,size) values (" + `"` + req.query.drink + `"` + "," + req.query.cid + "," + req.query.cal + "," + req.query.pop +") ; insert into sell (drink_id,price) values (" + `"NULL"` + "," + `"NULL"` + ") selet * from dual;";
   console.log(sql);
   db.serialize( () => {
     db.run( sql, (error, data) => {
