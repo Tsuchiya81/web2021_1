@@ -102,7 +102,46 @@ app.get("/insele", (req, res) => {
 
 app.get("/insert", (req, res) => {
   console.log(req.query);
-  let sql = "insert into drink (name,company_id,cal,size) values (" + `"` + req.query.drink + `"` + "," + req.query.cid + "," + req.query.cal + "," + req.query.pop +") ; insert into sell (drink_id,price) values (" + `"NULL"` + "," + `"NULL"` + ") selet * from dual;";
+  let sqls = [
+    "insert into drink (name,company_id,cal,size) values (" + `"` + req.query.drink + `"` + "," + req.query.cid + "," + req.query.cal + "," + req.query.pop +");",
+    "insert into sell (drink_id,price) values (" +`"`+"NULL"+`"`+","+`"`+"NULL"+`"`+") ;"
+  ]
+  for( let sql of sqls ){
+    console.log(sql);
+    db.serialize( () => {
+      db.run( sql, (error, data) => {
+        console.log(error);
+        if(error) {
+          res.render('error', {mes:"最初からやり直してください"});
+        }
+        res.render('result', {mes:"追加しました"});
+      });
+    });
+//console.log(req.body);
+  } 
+});
+
+
+/*
+app.get("/insert", (req, res) => {
+  console.log(req.query);
+  let sql = "insert into drink (name,company_id,cal,size) values (" + `"` + req.query.drink + `"` + "," + req.query.cid + "," + req.query.cal + "," + req.query.pop +") ; insert into sell (drink_id,price) values (6,200) ;";
+  console.log(sql);
+  db.serialize( () => {
+    db.run( sql, (error, data) => {
+      console.log(error);
+      if(error) {
+        res.render('error', {mes:"最初からやり直してください"});
+      }
+    res.render('result', {mes:"追加しました"});
+  });
+});
+//console.log(req.body);
+});
+
+app.get("/insert", (req, res) => {
+  console.log(req.query);
+  let sql = "insert into drink (name,company_id,cal,size) values (" + `"` + req.query.drink + `"` + "," + req.query.cid + "," + req.query.cal + "," + req.query.pop +") ; insert into sell (drink_id,price) values (" + `"NULL"` + "," + `"NULL"` + ") ;";
   console.log(sql);
   db.serialize( () => {
     db.run( sql, (error, data) => {
@@ -117,7 +156,7 @@ app.get("/insert", (req, res) => {
 });
 
 
-/*
+
 app.get("/insert", (req, res) => {
   console.log(req.query);
   let sql = "insert all into drink (name,company_id,cal,size) values (" + `"` + req.query.drink + `"` + "," + req.query.cid + "," + req.query.cal + "," + req.query.pop +") into sell (drink_id,price) values (" + `"NULL"` + "," + `"NULL"` + ") into comment (drink_id, message) values (" + `"NULL"` + "," + `"NULL"` + ");";
