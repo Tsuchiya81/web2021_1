@@ -26,32 +26,38 @@
   </form>
   <a href="/makerselect">メーカーごとに表示</a>
   <a href="public/name.html">商品名検索</a>
-  <table border="1">
-    <tr>
-      <th>ID　</th>
-      <th>商品名　</th>
-      <th>カロリー　</th>
-      <th>容量　</th>
-      <% for( let row of data ) { %>
-        <tr>
-            <td><%= row.id %></td>
-            <td><%= row.name %></td>
-            <td><%= row.cal %></td>
-            <td><%= row.size %></td>
-        </tr>
-      <% } %>
+
+  
+  <form action="/detail">
+    <table border="1">
+      <tr>
+        <th>ID　</th>
+        <th>商品名　</th>
+        <th>カロリー　</th>
+        <th>容量　</th>
+        <% for( let row of data ) { %>
+          <tr>
+              <td><label><input type="radio" name="id" value="<%= row.id %>"><%= row.id %></label></td>
+              <td><%= row.name %></td>
+              <td><%= row.cal %></td>
+              <td><%= row.size %></td>
+          </tr>
+        <% } %>
       <!--
       <% for( let row of data ) { %>
         <tr>
-            <td><a href="/detail"><%= row.id %></a></td>
+            <td><%= row.id %></a></td>
             <td><%= row.name %></td>
             <td><%= row.cal %></td>
             <td><%= row.size %></td>
         </tr>
       <% } %>
       -->
-    </tr>
-  </table>
+      </tr>
+    </table>
+    <input type="submit" value="選択した商品の詳細を表示">
+  </form>
+        
         <a href="/">トップへ戻る</a><br>
         <a href="/insele">商品を追加</a><br>
         <a href="/desele">商品を削除</a><br>

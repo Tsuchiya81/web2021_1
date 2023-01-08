@@ -60,13 +60,13 @@ app.get("/top", (req, res) => {
 app.get("/itiran", (req, res) => {
   console.log(req.query)
     db.serialize( () => {
-        db.all("select id, name, cal, size from drink order by " + req.query.item +" "+ req.query.desc +";", (error, data) => {
-            if( error ) {
-                res.render('error', {mes:"最初からやり直してください"});
-            }
-          //console.log(data);
-            res.render('selectAll', {data:data});
-        })
+      db.all("select id, name, cal, size from drink order by " + req.query.item +" "+ req.query.desc +";", (error, data) => {
+        if( error ) {
+          res.render('error', {mes:"最初からやり直してください"});
+        }
+        //console.log(data);
+        res.render('selectAll', {data:data});
+      })
     })
 })
 
@@ -153,7 +153,18 @@ app.get("/insertothers", (req, res) => {
 });
 
 
-
+app.get("/detail", (req, res) => {
+  console.log(req.query)
+    db.serialize( () => {
+      db.all("select id, name, cal, size from drink where id=" + req.query.id +";", (error, data) => {
+        if( error ) {
+          res.render('error', {mes:"最初からやり直してください"});
+        }
+        //console.log(data);
+        res.render('detail', {data:data});
+      })
+    })
+})
 
 
 
