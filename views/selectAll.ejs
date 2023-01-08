@@ -34,12 +34,22 @@
       <th>容量　</th>
       <% for( let row of data ) { %>
         <tr>
-            <td><a href="public/name.html"><%= row.id %></a></td>
+            <td><%= row.id %></td>
             <td><%= row.name %></td>
             <td><%= row.cal %></td>
             <td><%= row.size %></td>
         </tr>
       <% } %>
+      <!--
+      <% for( let row of data ) { %>
+        <tr>
+            <td><a href="/detail"><%= row.id %></a></td>
+            <td><%= row.name %></td>
+            <td><%= row.cal %></td>
+            <td><%= row.size %></td>
+        </tr>
+      <% } %>
+      -->
     </tr>
   </table>
         <a href="/">トップへ戻る</a><br>

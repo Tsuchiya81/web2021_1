@@ -95,7 +95,7 @@ app.get("/insele", (req, res) => {
                 res.render('error', {mes:"最初からやり直してください"});
             }
           //console.log(data);
-            res.render('insert1', {data:data});
+            res.render('insert', {data:data});
         })
     })
 })
@@ -158,51 +158,7 @@ app.get("/insertothers", (req, res) => {
 
 
 /*
-app.get("/insertsell", (req, res) => {
-  console.log(req.query);
-  let sql = "insert into sell (drink_id,price) values (" + `"` + req.query.name + `"` + "," + req.query.price + ");";
-  console.log(sql);
-  db.serialize( () => {
-    db.run( sql, (error, data) => {
-      console.log(error);
-      if(error) {
-        res.render('error', {mes:"最初からやり直してください"});
-      }
-    res.render('/insertid2');
-  });
-});
-//console.log(req.body);
-});
 
-
-app.get("/insertid2", (req, res) => {
-    db.serialize( () => {
-        db.all("select id name from drink where id = ( select MAX(id) from drink) ;", (error, data) => {
-            if( error ) {
-                res.render('error', {mes:"最初からやり直してください"});
-            }
-          //console.log(data);
-            res.render('insert3', {data:data});
-        })
-    })
-})
-
-
-app.get("/insertcomment", (req, res) => {
-  console.log(req.query);
-  let sql = "insert into comment (drink_id,message) values (" + `"` + req.query.name + `"` + "," + `"` + req.query.message + `"` +  ");";
-  console.log(sql);
-  db.serialize( () => {
-    db.run( sql, (error, data) => {
-      console.log(error);
-      if(error) {
-        res.render('error', {mes:"最初からやり直してください"});
-      }
-    res.render('result', {mes:"追加しました"});
-  });
-});
-//console.log(req.body);
-});
 */
 
 app.get("/desele", (req, res) => {
