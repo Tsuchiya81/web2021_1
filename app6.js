@@ -156,7 +156,7 @@ app.get("/insertothers", (req, res) => {
 app.get("/detail", (req, res) => {
   console.log(req.query)
     db.serialize( () => {
-      db.all("select id, name, cal, size from drink where id=" + req.query.id +";", (error, data) => {
+      db.all("select drink.name, drink.cal, drink.size, sell.price, comment.message, company.name as name2 from drink join company on drink.company_id = company.id join sell on drink.id = sell.drink_id join comment on drink.id = comment.drink_id where drink.id=" + req.query.id +";", (error, data) => {
         if( error ) {
           res.render('error', {mes:"最初からやり直してください"});
         }
