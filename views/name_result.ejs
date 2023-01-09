@@ -10,22 +10,25 @@
 </head>
 <body>
   <h2>検索結果</h2>
-  <table border="1">
-    <tr>
-      <th>ID　</th>
-      <th>商品名　</th>
-      <th>カロリー　</th>
-      <th>容量　</th>
-      <% for( let row of data ) { %>
-        <tr>
-            <td><a href="public/name.html"><%= row.id %></a></td>
-            <td><%= row.name %></td>
-            <td><%= row.cal %></td>
-            <td><%= row.size %></td>
-        </tr>
-      <% } %>
-    </tr>
-  </table>
+  <form action="/detail">
+    <table border="1">
+      <tr>
+        <th>ID　</th>
+        <th>商品名　</th>
+        <th>カロリー　</th>
+        <th>容量　</th>
+        <% for( let row of data ) { %>
+          <tr>
+              <td><label><input type="radio" name="id" value="<%= row.id %>"><%= row.id %></label></td>
+              <td><%= row.name %></td>
+              <td><%= row.cal %></td>
+              <td><%= row.size %></td>
+          </tr>
+        <% } %>
+      </tr>
+    </table>
+    <input type="submit" value="選択した商品の詳細を表示">
+  </form>
         <a href="/public/name.html">検索ワードを変える</a><br>
         <a href="/company">商品を追加</a><br>
         <a href="/delch">商品を削除</a><br>
