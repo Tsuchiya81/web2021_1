@@ -138,7 +138,7 @@ app.get("/insertothers", (req, res) => {
     "insert into comment (drink_id,message) values (" + req.query.drink +","+`"`+ req.query.message +`"`+") ;"
   ]
   for( let sql of sqls ){
-    console.log(sql);
+    //console.log(sql);
     db.serialize( () => {
       db.run( sql, (error, data) => {
         console.log(error);
@@ -174,7 +174,7 @@ app.get("/detail", (req, res) => {
 
 app.get("/desele", (req, res) => {
     db.serialize( () => {
-        db.all("select id, name,  cal, size from drink ;", (error, data) => {
+        db.all("select id, name, cal, size from drink ;", (error, data) => {
             if( error ) {
                 res.render('error', {mes:"最初からやり直してください"});
             }
@@ -187,18 +187,24 @@ app.get("/desele", (req, res) => {
 
 app.get("/delete", (req, res) => {
   console.log(req.query);
-  let sql = "delete from drink where id ="+ req.query.dri +";";
-  console.log(sql);
-  db.serialize( () => {
-    db.run( sql, (error, data) => {
-      console.log(error);
-      if(error) {
-        res.render('error', {mes:"最初からやり直してください"});
-      }
-    res.render('result', {mes:"削除しました"});
-  });
-});
+  let sqls = [
+    "delete from drink where id ="+ req.query.dri +";",
+    "delete from sell where drink_id =" + req.query.dri +";",
+    "delete from comment where drink_id ="+ req.query.dri +";"
+  ]
+  for( let sql of sqls ){
+    //console.log(sql);
+    db.serialize( () => {
+      db.run( sql, (error, data) => {
+        console.log(error);
+        if(error) {
+          res.render('error', {mes:"最初からやり直してください"});
+        }
+        res.render('result', {mes:"削除しました"});
+      });
+    });
 //console.log(req.body);
+  } 
 });
 
 app.get("/makerselect", (req, res) => {
