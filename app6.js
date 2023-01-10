@@ -95,7 +95,6 @@ app.get("/insertothers", (req, res) => {
     "insert into comment (drink_id,message) values (" + req.query.drink +","+`"`+ req.query.message +`"`+") ;"
   ]
   for( let sql of sqls ){
-    //console.log(sql);
     db.serialize( () => {
       db.run( sql, (error, data) => {
         console.log(error);
@@ -105,7 +104,6 @@ app.get("/insertothers", (req, res) => {
         res.render('result', {mes:"追加しました"});
       });
     });
-//console.log(req.body);
   } 
 });
 
